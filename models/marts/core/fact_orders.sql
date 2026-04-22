@@ -2,8 +2,8 @@ with orders as(
     select * from {{ ref("stg_orders")}}
 ),
 
-payments as(
-    select * from {{ ref("stg_payments")}}
+payment as(
+    select * from {{ ref("stg_payment")}}
 ),
 
 fact_orders as(
@@ -12,7 +12,7 @@ fact_orders as(
             amount 
 
     from orders o
-    left join payments p on o.order_id = p.orderid
+    left join payment p on o.order_id = p.orderid
 )
 
 select * from fact_orders
